@@ -1,3 +1,5 @@
 __pycache__
-data
+image/data
+language_char/data
+language_word/data
 output
