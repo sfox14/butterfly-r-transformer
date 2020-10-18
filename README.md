@@ -1,4 +1,4 @@
-# Butterfly R-Transformer
+# Butterfly + R-Transformer
 This repository combines R-Transformer with Butterfly matrices for faster and more efficient computation of Linear and RNN layers. The code depends on the CUDA implementation of [Kaleidoscope: An Efficient, Learnable Representation For All Structured Linear Maps](https://openreview.net/forum?id=BkgrBgSYDS) which is available from [here](https://github.com/HazyResearch/butterfly). It can be installed from our fork with:
 ```
 git clone https://github.com/sfox14/butterfly.git
@@ -7,10 +7,10 @@ python -c "from torch_butterfly.butterfly import Butterfly; print('SUCCESS')"
 ```
 
 # R-Transformer
-Pytorch implementation of [R-Transformer](https://arxiv.org/abs/1907.05572).  Some parts of the code are adapted from the implementation of [TCN](https://github.com/locuslab/TCN) and [Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html). 
+The Pytorch implementation of [R-Transformer](https://arxiv.org/abs/1907.05572) comes from [DSE/R-Transformer](https://github.com/DSE-MSU/R-transformer).  Some parts of the code are adapted from the implementation of [TCN](https://github.com/locuslab/TCN) and [Transformer](http://nlp.seas.harvard.edu/2018/04/03/attention.html). 
 
 
-For more details about R-Transformer, Please read our [paper](https://arxiv.org/abs/1907.05572).  If you find this work useful and use it on your research, please cite our paper.
+For more details about R-Transformer, Please read the [paper](https://arxiv.org/abs/1907.05572), and if you find this work useful and use it on your research, please cite:
 
 ```
 @article{wang2019rtransf,
@@ -22,7 +22,7 @@ For more details about R-Transformer, Please read our [paper](https://arxiv.org/
 ```
 
 ## Usage
-Our repository is arranged as follows:
+The repository is arranged as follows:
 ```
 [Task Name] /
     data/ # contains the datasets
@@ -32,8 +32,15 @@ Our repository is arranged as follows:
 models /
     RTransformer.py # RTransformer model    
 ```
-The dataset for the "polyphonic music modeling" experiment is already included in audio/data/. For other experiments that are based on much larger datasets, the data needs to be downloaded (from [torchvision.datasets](https://pytorch.org/docs/stable/torchvision/datasets.html) or [observations](https://github.com/edwardlib/observations)) and then put into the "data" folder which should be created firstly.
+The dataset for the "polyphonic music modeling" and "language word modelling" experiments are already included in audio/data/ and language_word/data respectively. For other experiments that are based on much larger datasets, the data needs to be downloaded and put into the "data" folder which should be created firstly. 
 
-When data is ready, the code can directly run with PyTorch  1.0.0.
-## Final Words
-We will keep this repo updated and hope it is useful to your research. 
+To run the language word modelling task with Butterfly multiplications on the PTB dataset:
+
+```
+cd language_word/
+mkdir output
+python experiment.py --rnn_type=CUSTOM --butterfly
+```
+This will save a log file and model checkpoint to ./output directory.
+
+
